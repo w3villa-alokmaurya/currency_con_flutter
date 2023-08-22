@@ -1,49 +1,84 @@
 import 'package:flutter/material.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
 
   @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  double result = 0.00;
+  void convert() {
+    result = double.parse(textEditingController.text);
+    result *= 81;
+    setState(() {});
+  }
+
+  final TextEditingController textEditingController = TextEditingController();
+  final border = const OutlineInputBorder(
+    borderRadius: BorderRadius.all(
+      Radius.circular(5),
+    ),
+    borderSide: BorderSide(width: 2.0, style: BorderStyle.solid),
+  );
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    const border = OutlineInputBorder(
-      borderRadius: BorderRadius.all(
-        Radius.circular(5),
-      ),
-      borderSide: BorderSide(width: 2.0, style: BorderStyle.solid),
-    );
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 251, 87, 37),
+        // elevation: 0,
+        title: const Text('Currency Converter'),
+        centerTitle: false,
+        actions: const [
+          Padding(
+            padding: EdgeInsets.only(right: 10),
+            child: Icon(Icons.dark_mode_outlined),
+          ),
+          Padding(
+            padding: EdgeInsets.only(right: 10),
+            child: Icon(Icons.more_vert),
+          ),
+        ],
+      ),
       backgroundColor: const Color.fromARGB(255, 251, 87, 37),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              "0",
-              style: TextStyle(
+            Text(
+              'INR ${result.toString()}',
+              style: const TextStyle(
                 fontWeight: FontWeight.w700,
                 fontSize: 25,
                 color: Color.fromRGBO(255, 255, 255, 1),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(10.0),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
               child: TextField(
-                style: TextStyle(
+                controller: textEditingController,
+                style: const TextStyle(
                   color: Colors.black,
                 ),
                 decoration: InputDecoration(
                   hintText: 'Please Enter the amont in USD',
                   focusedBorder: border,
                   enabledBorder: border,
-                  hintStyle: TextStyle(
+                  hintStyle: const TextStyle(
                     color: Colors.black,
                   ),
-                  prefixIcon: Icon(Icons.monetization_on),
+                  prefixIcon: const Icon(Icons.monetization_on),
                   prefixIconColor: Colors.black,
                   filled: true,
                   fillColor: Colors.white,
                 ),
-                keyboardType: TextInputType.numberWithOptions(
+                keyboardType: const TextInputType.numberWithOptions(
                   decimal: true,
                 ),
               ),
@@ -67,7 +102,7 @@ class Home extends StatelessWidget {
               padding: const EdgeInsets.only(left: 10, right: 10),
               child: ElevatedButton(
                 onPressed: () {
-                  //
+                  convert();
                 },
                 style: const ButtonStyle(
                   backgroundColor: MaterialStatePropertyAll(Colors.purple),
@@ -82,7 +117,7 @@ class Home extends StatelessWidget {
                     ),
                   ),
                 ),
-                child: const Text('Elevated'),
+                child: const Text('Convert'),
               ),
             ),
           ],

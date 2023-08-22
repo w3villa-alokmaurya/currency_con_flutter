@@ -52,7 +52,7 @@ class _HomeState extends State<Home> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'INR ${result.toString()}',
+              'INR ${result.toStringAsFixed(2)}',
               style: const TextStyle(
                 fontWeight: FontWeight.w700,
                 fontSize: 25,
